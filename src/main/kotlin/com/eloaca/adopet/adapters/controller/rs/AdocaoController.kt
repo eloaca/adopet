@@ -1,10 +1,9 @@
-package com.eloaca.adopet.adapters.controller
+package com.eloaca.adopet.adapters.controller.rs
 
 import com.eloaca.adopet.adapters.domain.dto.AdocaoDto
-import com.eloaca.adopet.adapters.domain.dto.DataDto
-import com.eloaca.adopet.adapters.domain.dto.SolicitacaoAdocaoDto
+import com.eloaca.adopet.adapters.controller.dto.DataDto
+import com.eloaca.adopet.adapters.controller.dto.SolicitacaoAdocaoDto
 import com.eloaca.adopet.core.ports.service.AdocaoPort
-import jakarta.websocket.server.PathParam
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -25,8 +24,8 @@ class AdocaoController (
         return ResponseEntity(service.salvarNovaAdocao(request.data), HttpStatus.CREATED)
     }
 
-    @GetMapping("/tutor/{id_tutor}")
-    fun consultaAdocoes(@RequestParam idTutor : Long) : ResponseEntity<DataDto<List<AdocaoDto>>> {
+    @GetMapping()
+    fun consultaAdocoes(@RequestParam(name = "id_tutor", required = true) idTutor : Long) : ResponseEntity<DataDto<List<AdocaoDto>>> {
         return ResponseEntity.ok(service.consultarAdocoes(idTutor))
     }
 }

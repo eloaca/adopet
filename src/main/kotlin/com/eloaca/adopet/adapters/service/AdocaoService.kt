@@ -2,8 +2,8 @@ package com.eloaca.adopet.adapters.service
 
 import com.eloaca.adopet.adapters.datastore.entity.AdocaoEntity
 import com.eloaca.adopet.adapters.domain.dto.AdocaoDto
-import com.eloaca.adopet.adapters.domain.dto.DataDto
-import com.eloaca.adopet.adapters.domain.dto.SolicitacaoAdocaoDto
+import com.eloaca.adopet.adapters.controller.dto.DataDto
+import com.eloaca.adopet.adapters.controller.dto.SolicitacaoAdocaoDto
 import com.eloaca.adopet.core.exceptions.AdocaoException
 import com.eloaca.adopet.core.ports.datastore.AdocaoRepository
 import com.eloaca.adopet.core.ports.datastore.PetRepository
@@ -41,7 +41,10 @@ class AdocaoService (val repository: AdocaoRepository,
 
             val entity = AdocaoEntity(pet, tutor)
             repository.save(entity)
-            val dto = AdocaoDto(entity.id, entity.tutor.nome, entity.status, entity.dataAdocao)
+            tutorRepository.save(entity.tutor)
+            petRepository.save(entity.pet)
+
+            val dto = AdocaoDto(entity)
             return DataDto(dto)
         } catch (e: AdocaoException) {
             log.info("Adocao nao registrada: ${e.message}")
@@ -54,7 +57,7 @@ class AdocaoService (val repository: AdocaoRepository,
         try {
             val entitys = repository.findByTutorId(idTutor)
             val adocoes = mutableListOf<AdocaoDto>()
-            entitys.forEach{ e -> adocoes.add(AdocaoDto(e.id, e.tutor.nome, e.status, e.dataAdocao))}
+            entitys.forEach{ e -> adocoes.add(AdocaoDto(e))}
 
             return DataDto(adocoes)
         } catch (e: AdocaoException) {

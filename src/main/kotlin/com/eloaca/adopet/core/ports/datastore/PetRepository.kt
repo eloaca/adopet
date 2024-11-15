@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface PetRepository : JpaRepository<PetEntity, Long> {
+
+    fun findByAdotado(adotado: Boolean) : List<PetEntity>
+
 }

@@ -1,4 +1,4 @@
-package com.eloaca.adopet.adapters.domain.dto
+package com.eloaca.adopet.adapters.controller.dto
 
 import com.eloaca.adopet.adapters.domain.enums.StatusAdocao
 import com.fasterxml.jackson.annotation.JsonProperty

@@ -1,8 +1,8 @@
 package com.eloaca.adopet.core.ports.service
 
 import com.eloaca.adopet.adapters.domain.dto.AdocaoDto
-import com.eloaca.adopet.adapters.domain.dto.DataDto
-import com.eloaca.adopet.adapters.domain.dto.SolicitacaoAdocaoDto
+import com.eloaca.adopet.adapters.controller.dto.DataDto
+import com.eloaca.adopet.adapters.controller.dto.SolicitacaoAdocaoDto
 
 interface AdocaoPort {
 

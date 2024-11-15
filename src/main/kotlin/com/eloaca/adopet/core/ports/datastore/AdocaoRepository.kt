@@ -13,4 +13,6 @@ interface AdocaoRepository : JpaRepository<AdocaoEntity, Long> {
     fun existsByPetIdAndStatus(idPet: Long, status: StatusAdocao) : Boolean
 
     fun findByTutorId(idTutor: Long) : List<AdocaoEntity>
+
+    fun findByStatus(status: StatusAdocao) : List<AdocaoEntity>
 }

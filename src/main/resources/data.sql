@@ -7,9 +7,15 @@ INSERT INTO tutores (id, nome, documento, tipo_documento) VALUES (5, 'Paula Lima
 
 
 -- Inserção de dados na tabela pets
-INSERT INTO pets (id, nome, tutor_id, adocao_id) VALUES (1, 'Luna', NULL, NULL);
-INSERT INTO pets (id, nome, tutor_id, adocao_id) VALUES (2, 'Bella', NULL, NULL);
-INSERT INTO pets (id, nome, tutor_id, adocao_id) VALUES (3, 'Rex', NULL, NULL);
-INSERT INTO pets (id, nome, tutor_id, adocao_id) VALUES (4, 'Max', NULL, NULL);
-INSERT INTO pets (id, nome, tutor_id, adocao_id) VALUES (5, 'Charlie', NULL, NULL);
+--INSERT INTO pets (id, nome, tipo, adotado, tutor_id, adocao_id) VALUES (1, 'Luna', 'COELHO', false, NULL, NULL);
+--INSERT INTO pets (id, nome, tipo, adotado, tutor_id, adocao_id) VALUES (2, 'Bella', 'GATO', false, NULL, NULL);
+--INSERT INTO pets (id, nome, tipo, adotado, tutor_id, adocao_id) VALUES (3, 'Rex', 'CACHORRO', false, NULL, NULL);
+--INSERT INTO pets (id, nome, tipo, adotado, tutor_id, adocao_id) VALUES (4, 'Max', 'PEIXE', false, NULL, NULL);
+--INSERT INTO pets (id, nome, tipo, adotado, tutor_id, adocao_id) VALUES (5, 'Charlie', 'HAMSTER', false, NULL, NULL);
+
+INSERT INTO pets (id, nome, tipo, adotado) VALUES (1, 'Luna', 'COELHO', false);
+INSERT INTO pets (id, nome, tipo, adotado) VALUES (2, 'Bella', 'GATO', false);
+INSERT INTO pets (id, nome, tipo, adotado) VALUES (3, 'Rex', 'CACHORRO', false);
+INSERT INTO pets (id, nome, tipo, adotado) VALUES (4, 'Max', 'PEIXE', false);
+INSERT INTO pets (id, nome, tipo, adotado) VALUES (5, 'Charlie', 'HAMSTER', false);
 
