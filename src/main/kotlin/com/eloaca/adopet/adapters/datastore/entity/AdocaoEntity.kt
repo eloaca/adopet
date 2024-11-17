@@ -2,7 +2,7 @@ package com.eloaca.adopet.adapters.datastore.entity
 
 import com.eloaca.adopet.adapters.domain.enums.StatusAdocao
 import jakarta.persistence.*
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Entity
 @Table(name = "adocoes")
@@ -10,12 +10,14 @@ data class AdocaoEntity(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id : Long = 0,
+    val id: Long = 0,
 
-    var dataAdocao: LocalDate,
+    var dataHoraSolicitacao: LocalDateTime,
+
+    var dataHoraAdocao: LocalDateTime? = null,
 
     @Enumerated(EnumType.STRING)
-    val status: StatusAdocao,
+    var status: StatusAdocao,
 
     @OneToOne(fetch = FetchType.LAZY)
     val pet: PetEntity,
@@ -24,9 +26,9 @@ data class AdocaoEntity(
     val tutor: TutorEntity,
 ) {
 
-    constructor(pet: PetEntity, tutor: TutorEntity) : this(
-        dataAdocao = LocalDate.now(),
-        status = StatusAdocao.ADOCAO_EM_ANDAMENTO,
+    constructor(pet: PetEntity, tutor: TutorEntity, status: StatusAdocao) : this(
+        dataHoraSolicitacao = LocalDateTime.now(),
+        status = status,
         pet = pet,
         tutor = tutor
     )

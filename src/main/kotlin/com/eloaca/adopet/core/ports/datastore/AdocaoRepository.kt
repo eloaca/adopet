@@ -15,4 +15,5 @@ interface AdocaoRepository : JpaRepository<AdocaoEntity, Long> {
     fun findByTutorId(idTutor: Long) : List<AdocaoEntity>
 
     fun findByStatus(status: StatusAdocao) : List<AdocaoEntity>
+
 }

@@ -10,5 +10,7 @@ class SolicitacaoAdocaoDto(
     val idPet: Long,
 
     @JsonProperty("id_tutor")
-    val idTutor: Long
+    val idTutor: Long,
+
+    val automatico: Boolean
 )

@@ -18,7 +18,7 @@ data class PetEntity(
     @Enumerated(EnumType.STRING)
     val tipo: TipoPet,
 
-    val adotado: Boolean,
+    var adotado: Boolean,
 
 //    @OneToOne(fetch = FetchType.LAZY)
 //    val tutor: TutorEntity,

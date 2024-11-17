@@ -12,7 +12,7 @@ class PetEmAdocaoValidacao(val repository: AdocaoRepository) : AdocaoValidacao {
 
     override fun validar(solicitacao: SolicitacaoAdocaoDto) {
         val adocaoEmAndamento = repository.existsByPetIdAndStatus(solicitacao.idPet, StatusAdocao.ADOCAO_EM_ANDAMENTO)
-        if (adocaoEmAndamento) {
+        if (adocaoEmAndamento && !solicitacao.automatico) {
             throw AdocaoException("Pet ja esta sendo adotado")
         }
     }

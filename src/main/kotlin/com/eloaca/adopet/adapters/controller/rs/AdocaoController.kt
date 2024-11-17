@@ -24,7 +24,7 @@ class AdocaoController (
         return ResponseEntity(service.salvarNovaAdocao(request.data), HttpStatus.CREATED)
     }
 
-    @GetMapping()
+    @GetMapping
     fun consultaAdocoes(@RequestParam(name = "id_tutor", required = true) idTutor : Long) : ResponseEntity<DataDto<List<AdocaoDto>>> {
         return ResponseEntity.ok(service.consultarAdocoes(idTutor))
     }

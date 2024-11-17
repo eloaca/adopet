@@ -16,3 +16,6 @@ spring:
 
 server:
   port: 1996
+
+cron:
+  expression: '0 0/1 * * * ?'

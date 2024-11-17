@@ -1,5 +1,6 @@
 package com.eloaca.adopet.adapters.datastore.entity
 
+import com.eloaca.adopet.adapters.controller.dto.SolicitacaoTutorDto
 import com.eloaca.adopet.adapters.domain.enums.TipoDocumento
 import jakarta.persistence.*
 
@@ -9,7 +10,7 @@ data class TutorEntity(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    val id: Long = 0,
 
     val nome: String,
 
@@ -18,11 +19,10 @@ data class TutorEntity(
 
     val documento: String,
 
-    @OneToMany
-    val pets: List<PetEntity>,
-
-    @OneToMany
-    val adocoes: List<AdocaoEntity>
 ) {
-
+    constructor(solicitacao: SolicitacaoTutorDto) : this(
+        nome = solicitacao.nome,
+        tipoDocumento = solicitacao.tipo,
+        documento = solicitacao.documento
+    )
 }
