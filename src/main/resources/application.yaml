@@ -18,4 +18,4 @@ server:
   port: 1996
 
 cron:
-  expression: '0 0/1 * * * ?'
+  expression: '59 23 * * * ?'

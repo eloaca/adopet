@@ -7,6 +7,7 @@ import com.eloaca.adopet.core.ports.service.AdocaoPort
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -27,5 +28,16 @@ class AdocaoController (
     @GetMapping
     fun consultaAdocoes(@RequestParam(name = "id_tutor", required = true) idTutor : Long) : ResponseEntity<DataDto<List<AdocaoDto>>> {
         return ResponseEntity.ok(service.consultarAdocoes(idTutor))
+    }
+
+    @GetMapping("/aprovar")
+    fun aprovarAdocoes() : ResponseEntity<Any> {
+        service.adotarTodosPets()
+        return ResponseEntity.noContent().build()
+    }
+
+    @GetMapping("/aprovar/{id_adocao}")
+    fun aprovarAdocao(@PathVariable(name = "id_adocao", required = true) idAdocao : Long) : ResponseEntity<DataDto<AdocaoDto>> {
+        return ResponseEntity.ok(service.adotarPet(idAdocao))
     }
 }

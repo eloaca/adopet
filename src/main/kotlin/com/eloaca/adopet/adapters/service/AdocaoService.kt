@@ -36,6 +36,63 @@ class AdocaoService (val repository: AdocaoRepository,
         return adocoesPorTutor(idTutor)
     }
 
+    override fun adotarTodosPets() {
+        finalizarAdocoes()
+    }
+
+    override fun adotarPet(idAdocao: Long): DataDto<AdocaoDto> {
+        return adotePet(idAdocao)
+    }
+
+    fun adocoesPorTutor(idTutor: Long): DataDto<List<AdocaoDto>> {
+        try {
+            val entitys = repository.findByTutorId(idTutor)
+            val adocoes = mutableListOf<AdocaoDto>()
+            entitys.forEach{ e -> adocoes.add(AdocaoDto(e))}
+
+            return DataDto(adocoes)
+        } catch (e: AdocaoException) {
+            log.info("Adocoes nao consultadas: ${e.message}")
+            throw e
+        }
+    }
+
+    @Transactional(value = Transactional.TxType.REQUIRES_NEW)
+    private fun adotePet(idAdocao : Long): DataDto<AdocaoDto> {
+        try {
+            val adocao = repository.getReferenceById(idAdocao)
+            val tutor = adocao.tutor
+            val pet = adocao.pet
+
+            try {
+                for (v in validacoes) {
+                    v.validar(solicitacao = SolicitacaoAdocaoDto(pet.id, tutor.id,true))
+                }
+            } catch (e: AdocaoException) {
+                log.error("Adocao nao finalizada ${e.message}")
+                adocao.status = StatusAdocao.DISPONIVEL
+                repository.save(adocao)
+                throw e
+            }
+
+            pet.adotado = true
+            adocao.status = StatusAdocao.ADOTADO
+            adocao.dataHoraAdocao = LocalDateTime.now()
+
+            repository.save(adocao)
+            petRepository.save(pet)
+
+            log.info("Adocao finalizada. Pet adotados: ${pet.nome}")
+
+            val dto = AdocaoDto(adocao)
+            return DataDto(dto)
+        } catch (e: AdocaoException) {
+            log.info("Adocao nao registrada: ${e.message}")
+            throw e
+        }
+    }
+
+    @Transactional(value = Transactional.TxType.REQUIRES_NEW)
     fun novaAdocao(solicitacao: SolicitacaoAdocaoDto) : DataDto<AdocaoDto> {
         try {
             val pet = petRepository.getReferenceById(solicitacao.idPet)
@@ -63,22 +120,9 @@ class AdocaoService (val repository: AdocaoRepository,
         }
     }
 
-    fun adocoesPorTutor(idTutor: Long): DataDto<List<AdocaoDto>> {
-        try {
-            val entitys = repository.findByTutorId(idTutor)
-            val adocoes = mutableListOf<AdocaoDto>()
-            entitys.forEach{ e -> adocoes.add(AdocaoDto(e))}
-
-            return DataDto(adocoes)
-        } catch (e: AdocaoException) {
-            log.info("Adocoes nao consultadas: ${e.message}")
-            throw e
-        }
-    }
-
     @Transactional(value = Transactional.TxType.REQUIRES_NEW)
     @Scheduled(cron = "\${cron.expression}")
-    fun adocaoAutomatico() {
+    fun finalizarAdocoes() {
         log.info("Finalizando adocoes automaticamente")
         var adotados = 0
         try {
@@ -113,6 +157,6 @@ class AdocaoService (val repository: AdocaoRepository,
             log.error(e.message)
             throw e
         }
-        log.info("Adocoes finalizadas. Pets adotados: ${adotados}")
+        log.info("Adocoes finalizadas. Pets adotados: $adotados")
     }
 }

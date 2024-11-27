@@ -10,4 +10,7 @@ interface AdocaoPort {
 
    fun consultarAdocoes(idTutor: Long) : DataDto<List<AdocaoDto>>
 
+   fun adotarTodosPets()
+
+   fun adotarPet(idAdocao : Long) : DataDto<AdocaoDto>
 }
