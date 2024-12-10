@@ -11,21 +11,16 @@ data class PetEntity(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0,
+    val id: Long = 1,
 
-    val nome: String,
+    var nome: String,
 
     @Enumerated(EnumType.STRING)
     val tipo: TipoPet,
 
     var adotado: Boolean,
 
-//    @OneToOne(fetch = FetchType.LAZY)
-//    val tutor: TutorEntity,
-//
-//    @OneToOne(fetch = FetchType.LAZY)
-//    val adocao: AdocaoEntity
-) {
+    ) {
 
     constructor(solicitacao: SolicitacaoPetDto) : this(
         nome = solicitacao.nome,

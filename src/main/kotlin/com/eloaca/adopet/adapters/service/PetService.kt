@@ -5,17 +5,15 @@ import com.eloaca.adopet.adapters.controller.dto.SolicitacaoPetDto
 import com.eloaca.adopet.adapters.datastore.entity.PetEntity
 import com.eloaca.adopet.adapters.domain.dto.PetDto
 import com.eloaca.adopet.core.exceptions.PetException
-import com.eloaca.adopet.core.ports.datastore.AdocaoRepository
 import com.eloaca.adopet.core.ports.datastore.PetRepository
 import com.eloaca.adopet.core.ports.service.PetPort
 import org.springframework.stereotype.Service
-import java.lang.RuntimeException
 
 @Service
 class PetService(
-    val adocaoRepository: AdocaoRepository,
     val repository: PetRepository
 ) : PetPort {
+
     override fun consultarPetsPorAdocao(adotado: Boolean): DataDto<List<PetDto>> {
         try {
             val pets = mutableListOf<PetDto>()

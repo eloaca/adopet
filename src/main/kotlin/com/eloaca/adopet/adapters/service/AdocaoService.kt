@@ -20,12 +20,12 @@ import java.time.LocalDateTime
 
 
 @Service
-class AdocaoService (val repository: AdocaoRepository,
-                     val petRepository: PetRepository,
-                     val tutorRepository: TutorRepository,
-                     val validacoes : List<AdocaoValidacao>) : AdocaoPort {
+class AdocaoService (private val repository: AdocaoRepository,
+                     private val petRepository: PetRepository,
+                     private val tutorRepository: TutorRepository,
+                     private val validacoes : List<AdocaoValidacao>) : AdocaoPort {
 
-    val log: Logger = LoggerFactory.getLogger(AdocaoService::class.java.name)
+    private val log: Logger = LoggerFactory.getLogger(AdocaoService::class.java.name)
 
     @Transactional(value = Transactional.TxType.REQUIRES_NEW)
     override fun salvarNovaAdocao(solicitacao: SolicitacaoAdocaoDto): DataDto<AdocaoDto> {
@@ -44,7 +44,7 @@ class AdocaoService (val repository: AdocaoRepository,
         return adotePet(idAdocao)
     }
 
-    fun adocoesPorTutor(idTutor: Long): DataDto<List<AdocaoDto>> {
+    private fun adocoesPorTutor(idTutor: Long): DataDto<List<AdocaoDto>> {
         try {
             val entitys = repository.findByTutorId(idTutor)
             val adocoes = mutableListOf<AdocaoDto>()
@@ -82,7 +82,7 @@ class AdocaoService (val repository: AdocaoRepository,
             repository.save(adocao)
             petRepository.save(pet)
 
-            log.info("Adocao finalizada. Pet adotados: ${pet.nome}")
+            log.info("Adocao finalizada. Pet adotado: ${pet.nome}")
 
             val dto = AdocaoDto(adocao)
             return DataDto(dto)
@@ -93,7 +93,7 @@ class AdocaoService (val repository: AdocaoRepository,
     }
 
     @Transactional(value = Transactional.TxType.REQUIRES_NEW)
-    fun novaAdocao(solicitacao: SolicitacaoAdocaoDto) : DataDto<AdocaoDto> {
+    private fun novaAdocao(solicitacao: SolicitacaoAdocaoDto) : DataDto<AdocaoDto> {
         try {
             val pet = petRepository.getReferenceById(solicitacao.idPet)
             val tutor = tutorRepository.getReferenceById(solicitacao.idTutor)
@@ -122,7 +122,7 @@ class AdocaoService (val repository: AdocaoRepository,
 
     @Transactional(value = Transactional.TxType.REQUIRES_NEW)
     @Scheduled(cron = "\${cron.expression}")
-    fun finalizarAdocoes() {
+    protected fun finalizarAdocoes() {
         log.info("Finalizando adocoes automaticamente")
         var adotados = 0
         try {

@@ -10,7 +10,7 @@ data class AdocaoEntity(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0,
+    val id: Long = 1,
 
     var dataHoraSolicitacao: LocalDateTime,
 
