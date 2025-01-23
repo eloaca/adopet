@@ -30,13 +30,13 @@ class AdocaoController (
         return ResponseEntity.ok(service.consultarAdocoes(idTutor))
     }
 
-    @GetMapping("/aprovar")
+    @PostMapping("/aprovar")
     fun aprovarAdocoes() : ResponseEntity<Any> {
         service.adotarTodosPets()
         return ResponseEntity.noContent().build()
     }
 
-    @GetMapping("/aprovar/{id_adocao}")
+    @PostMapping("/aprovar/{id_adocao}")
     fun aprovarAdocao(@PathVariable(name = "id_adocao", required = true) idAdocao : Long) : ResponseEntity<DataDto<AdocaoDto>> {
         return ResponseEntity.ok(service.adotarPet(idAdocao))
     }

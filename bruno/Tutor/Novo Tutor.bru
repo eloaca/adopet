@@ -1,0 +1,26 @@
+meta {
+  name: Novo Tutor
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:1996/tutores
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  User-Agent: insomnia/10.1.1
+}
+
+body:json {
+  {
+    "data" : {
+      "nome" : "Eloá Cardozo",
+      "tipo" : "RG",
+      "documento" : "40335943"
+    }
+  }
+}

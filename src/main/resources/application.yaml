@@ -13,6 +13,7 @@ spring:
   h2:
     console:
       enabled: true
+      path: /adopet
 
 server:
   port: 1996

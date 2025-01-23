@@ -1,0 +1,312 @@
+{
+  "name": "Adopet",
+  "version": "1",
+  "items": [
+    {
+      "type": "folder",
+      "name": "Pets",
+      "items": [
+        {
+          "type": "http",
+          "name": "Novo Pet",
+          "seq": 3,
+          "request": {
+            "url": "http://localhost:1996/pets",
+            "method": "POST",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "User-Agent",
+                "value": "insomnia/10.1.1",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"data\" : {\n    \"nome\" : \"marinha\",\n    \"tipo\" : \"HAMSTER\"\n  }\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Pets",
+          "seq": 4,
+          "request": {
+            "url": "http://localhost:1996/pets?adotado=false",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": "insomnia/10.1.1",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": [
+              {
+                "name": "adotado",
+                "value": "false",
+                "enabled": true
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Tutor",
+      "items": [
+        {
+          "type": "http",
+          "name": "Novo Tutor",
+          "seq": 2,
+          "request": {
+            "url": "http://localhost:1996/tutores",
+            "method": "POST",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "User-Agent",
+                "value": "insomnia/10.1.1",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"data\" : {\n    \"nome\" : \"Eloá Cardozo\",\n    \"tipo\" : \"RG\",\n    \"documento\" : \"40335943\"\n  }\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Adocoes",
+      "items": [
+        {
+          "type": "http",
+          "name": "Adocoes por tutor",
+          "seq": 7,
+          "request": {
+            "url": "http://localhost:1996/adocoes?id_tutor=1",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": "insomnia/10.1.1",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": [
+              {
+                "name": "id_tutor",
+                "value": "1",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Aprovar Adocao",
+          "seq": 5,
+          "request": {
+            "url": "http://localhost:1996/adocoes/aprovar/1",
+            "method": "POST",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": "insomnia/10.2.0",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Aprovar Adocoes",
+          "seq": 6,
+          "request": {
+            "url": "http://localhost:1996/adocoes/aprovar",
+            "method": "POST",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": "insomnia/10.2.0",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Nova adocao",
+          "seq": 8,
+          "request": {
+            "url": "http://localhost:1996/adocoes",
+            "method": "POST",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "User-Agent",
+                "value": "insomnia/10.1.1",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"data\" : {\n    \"id_pet\" : 1,\n    \"id_tutor\": 1\n  }\n} ",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        }
+      ]
+    },
+    {
+      "type": "json",
+      "name": "bruno",
+      "seq": 1
+    }
+  ],
+  "environments": []
+}

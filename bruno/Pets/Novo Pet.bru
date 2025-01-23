@@ -1,0 +1,25 @@
+meta {
+  name: Novo Pet
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:1996/pets
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  User-Agent: insomnia/10.1.1
+}
+
+body:json {
+  {
+    "data" : {
+      "nome" : "marinha",
+      "tipo" : "HAMSTER"
+    }
+  }
+}

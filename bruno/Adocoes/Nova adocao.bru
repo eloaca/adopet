@@ -1,0 +1,25 @@
+meta {
+  name: Nova adocao
+  type: http
+  seq: 8
+}
+
+post {
+  url: http://localhost:1996/adocoes
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  User-Agent: insomnia/10.1.1
+}
+
+body:json {
+  {
+    "data" : {
+      "id_pet" : 1,
+      "id_tutor": 1
+    }
+  } 
+}
